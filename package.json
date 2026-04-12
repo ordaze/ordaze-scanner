@@ -1,6 +1,6 @@
 {
   "name": "@ordaze/scanner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Scan your codebase for analytics events. Detect SDKs, discover tracking patterns, and report coverage.",
   "type": "module",
   "main": "dist/index.cjs",
