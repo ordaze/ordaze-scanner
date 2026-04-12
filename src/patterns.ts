@@ -25,6 +25,8 @@ export function extractEventName(match: RegExpExecArray): string | null {
   if (!name) return null;
   // Reject template literal expressions like ${name} or ${event_type}
   if (name.includes("${")) return null;
+  // Reject JSX/documentation artifacts like {eventInput} from code examples
+  if (name.startsWith("{") || name.startsWith("}")) return null;
   return name;
 }
 

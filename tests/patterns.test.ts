@@ -40,6 +40,14 @@ describe("callRegex (via buildPatterns)", () => {
   it("does NOT match template literal with prefix: track(`event_${x}`)", () => {
     expect(testMatch("track", "track(`event_${x}`)")).toBeNull();
   });
+
+  it("does NOT match JSX artifacts: track('{eventInput}')", () => {
+    expect(testMatch("track", "track('{eventInput}')")).toBeNull();
+  });
+
+  it("does NOT match closing brace artifacts: track('}something')", () => {
+    expect(testMatch("track", "track('}something')")).toBeNull();
+  });
 });
 
 describe("buildPatterns", () => {

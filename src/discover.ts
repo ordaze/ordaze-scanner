@@ -116,10 +116,12 @@ function findWrapperFunctions(files: string[], language: Language): TrackingPatt
     );
     if (!importsSDK) continue;
 
-    // Find exported function names that look like tracking functions
+    // Find exported function names that look like tracking functions.
+    // Require word boundary or specific suffixes to avoid matching config
+    // functions like isSessionTrackingEnabled or getNetworkTrackingConfig.
     const exportedFunctions = extractExportedFunctions(content, language);
     const trackingLike = exportedFunctions.filter((fn) =>
-      /track|log.?event|capture|record|send.?event|report/i.test(fn),
+      /^track\w*Event|^log\w*Event|^capture\w*|^record\w*Event|^send\w*Event|^report\w*Event|\.track$|\.capture$|\.logEvent$/i.test(fn),
     );
 
     if (trackingLike.length > 0) {

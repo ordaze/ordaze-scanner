@@ -106,6 +106,23 @@ describe("discoverPatterns", () => {
     });
   });
 
+  it("does NOT follow config functions that contain 'track' as substring", () => {
+    createFixture({
+      "src/analytics.ts":
+        'import { logEvent } from "firebase/analytics";\n' +
+        "export function isSessionTrackingEnabled() { return true; }\n" +
+        "export function getNetworkTrackingConfig() { return {}; }\n" +
+        "export function trackEvent(name: string) { logEvent(analytics, name); }",
+    });
+    const patterns = discoverPatterns(tempDir, "typescript");
+    const wrapperNames = patterns
+      .filter((p) => p.source === "import-follow")
+      .map((p) => p.functionName);
+    expect(wrapperNames).toContain("trackEvent");
+    expect(wrapperNames).not.toContain("isSessionTrackingEnabled");
+    expect(wrapperNames).not.toContain("getNetworkTrackingConfig");
+  });
+
   it("returns empty array for directory with no source files", () => {
     const patterns = discoverPatterns(tempDir, "typescript");
     expect(patterns).toEqual([]);
