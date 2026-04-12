@@ -1,0 +1,45 @@
+name: 'Ordaze Scanner'
+description: 'Scan your codebase for analytics events and report coverage to Ordaze'
+author: 'Ordaze'
+branding:
+  icon: 'search'
+  color: 'blue'
+
+inputs:
+  token:
+    description: 'Ordaze API token'
+    required: true
+  url:
+    description: 'Ordaze API URL (e.g., https://app.ordaze.com)'
+    required: true
+  dir:
+    description: 'Directory to scan'
+    default: '.'
+  platform:
+    description: 'Platform slug override (e.g., ios, web, backend)'
+    required: false
+  source:
+    description: 'Source slug for reporting (alias for platform)'
+    required: false
+  strict:
+    description: 'Fail if coverage is below min-coverage threshold'
+    default: 'false'
+  min-coverage:
+    description: 'Minimum coverage percentage (0-100, used with strict)'
+    required: false
+
+outputs:
+  matched:
+    description: 'Number of matched events'
+  missing:
+    description: 'Number of missing events'
+  unmatched:
+    description: 'Number of unmatched events (in code but not in catalog)'
+  coverage:
+    description: 'Coverage percentage'
+  events:
+    description: 'Total unique events found'
+
+runs:
+  using: 'node20'
+  main: 'dist/action/index.js'

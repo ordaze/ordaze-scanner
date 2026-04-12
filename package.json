@@ -1,0 +1,64 @@
+{
+  "name": "@ordaze/scanner",
+  "version": "1.0.0",
+  "description": "Scan your codebase for analytics events. Detect SDKs, discover tracking patterns, and report coverage.",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "ordaze-scan": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "analytics",
+    "scanner",
+    "tracking",
+    "events",
+    "segment",
+    "amplitude",
+    "mixpanel",
+    "posthog",
+    "firebase",
+    "code-analysis"
+  ],
+  "author": "Ignas Jasiūnas",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jasiuno/ordaze-scanner.git"
+  },
+  "homepage": "https://ordaze.com/docs/scanner",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  }
+}
