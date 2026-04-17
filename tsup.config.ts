@@ -24,12 +24,12 @@ export default defineConfig([
       "process.env.PACKAGE_VERSION": JSON.stringify(pkg.version),
     },
   },
-  // GitHub Action (ESM, fully bundled, no external deps — runs on node20).
-  // `action.yml` points at `dist/action/index.js`; ESM output with
-  // `"type": "module"` in package.json lands at that exact filename.
+  // GitHub Action (CJS, fully bundled — matches how production Actions ship).
+  // `action.yml` points at `dist/action/index.cjs`. CJS avoids ESM+`@actions/core`
+  // interop issues (dynamic require of 'os' fails in an ESM bundle).
   {
     entry: { "action/index": "action/index.ts" },
-    format: ["esm"],
+    format: ["cjs"],
     target: "node20",
     clean: false,
     dts: false,
