@@ -1,5 +1,6 @@
 node_modules/
-dist/
+# Ignore dist contents, but re-include dist/action/ for the GitHub Action bundle
+dist/*
 !dist/action/
 *.tsbuildinfo
 .DS_Store
