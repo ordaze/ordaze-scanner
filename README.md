@@ -118,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: Jasiuno/ordaze-scanner@v1
+      - uses: ordaze/ordaze-scanner@v1
         with:
           token: ${{ secrets.ORDAZE_TOKEN }}
           url: ${{ secrets.ORDAZE_URL }}
